@@ -4,18 +4,23 @@ $LOCATION='Australia East'
 az network watcher configure --resource-group NetworkWatcherRG --locations $LOCATION --enabled -o table
  
  
- az deployment sub create \
-   --location $LOCATION \
-   --template-file azuredeploy30305suba.json \
+ az deployment sub create `
+   --location $LOCATION `
+   --template-file azuredeploy30305suba.json `
    --parameters rgName=az30305a-labRG rgLocation=$LOCATION
    
    
    
    
-   az deployment group create \
-   --resource-group az30305a-labRG \
-   --template-file azuredeploy30305rga.json \
-   --parameters @azuredeploy30305rga.parameters.json vmSize=Standard_D2s_v3
+   az deployment group create `
+   --resource-group az30305a-labRG `
+   --template-file azuredeploy30305rga.json `
+   --parameters $azuredeploy30305rga.parameters.json vmSize=Standard_D2s_v3
    
    
-   
+   $LOCATION='Australia East'
+az deployment sub create --location $LOCATION' --template-file azuredeploy30305subc.json --parameters rgName=az30305c-labRG rgLocation=$LOCATION
+
+
+
+   az deployment group create --resource-group az30305c-labRG --template-file azuredeploy30305rgc.json --parameters @azuredeploy30305rgc.parameters.json vmSize=Standard_D2s_v3
